@@ -1,0 +1,17 @@
+language: python
+sudo: required
+python:
+  - "2.7"
+  # does not have headers provided, please ask https://launchpad.net/~pypy/+archive/ppa
+  # maintainers to fix their pypy-dev package.
+  # - "pypy"
+# command to install dependencies
+before_install:
+  - sudo apt-get update -qq
+  - make deps
+install:
+  - make travis-deps
+  - make install
+# command to run tests
+script:
+ - make tests
