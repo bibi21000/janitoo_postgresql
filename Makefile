@@ -122,10 +122,10 @@ develop:
 	@echo
 	@echo "Installation for developpers of ${MODULENAME} finished."
 	@echo "Install mysql for $(distro):$(codename)."
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server mysql-client libmysqlclient-dev
-	sudo service mysql restart
+	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql
+	sudo service postgresql restart
 	sleep 2
-	-ls -lisa /var/log/mysql*
+	-ls -lisa /var/log/postgresql*
 	-netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
 	@echo
 	@echo "Dependencies for ${MODULENAME} finished."
@@ -138,7 +138,7 @@ travis-deps: deps
 
 tests:
 	-netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
-	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 3306
+	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 5432
 	@echo
 	@echo "Tests for ${MODULENAME} finished."
 
