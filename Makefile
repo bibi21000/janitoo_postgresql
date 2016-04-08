@@ -35,7 +35,7 @@ endif
 
 MODULENAME   = $(shell basename `pwd`)
 
-NOSECOVER     = --cover-package=janitoo,janitoo_db,${MODULENAME} --cover-min-percentage= --with-coverage --cover-inclusive --cover-tests --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
+NOSECOVER     = --cover-package=janitoo,janitoo_db,${MODULENAME} --cover-min-percentage= --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
 
 DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
 BOWERDEPS := $(shell [ -f bower.deps ] && cat bower.deps)
@@ -48,7 +48,7 @@ codename = $(shell lsb_release -a 2>/dev/null|grep Codename|cut -f2 -d ":"|sed -
 
 -include Makefile.local
 
-.PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps
+.PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps docker-tests
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -135,6 +135,15 @@ travis-deps: deps
 	sudo mkdir -p /opt/janitoo/src/janitoo_mysql
 	@echo
 	@echo "Travis dependencies for ${MODULENAME} installed."
+
+docker-inst:
+	@echo "Configure Docker image."
+	@echo
+	sudo -u postgres createdb --encoding utf-8 janitoo_tests
+
+docker-tests: tests
+	@echo
+	@echo "Docker tests for ${MODULENAME} finished."
 
 tests:
 	-netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
