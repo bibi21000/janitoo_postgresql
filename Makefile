@@ -139,9 +139,12 @@ travis-deps: deps
 docker-inst:
 	@echo "Configure Docker image."
 	@echo
-	sudo -u postgres createdb --encoding utf-8 janitoo_tests
+	sudo -u postgres createdb --encoding utf-8 --template template0 janitoo_tests
 
-docker-tests: tests
+docker-tests:
+	@echo
+	@echo "Docker tests for ${MODULENAME} start."
+	[ -f tests/test_docker.py ] && $(NOSE) $(NOSEOPTS) $(NOSEDOCKER) tests/test_docker.py
 	@echo
 	@echo "Docker tests for ${MODULENAME} finished."
 
