@@ -140,6 +140,8 @@ docker-inst:
 	@echo "Configure Docker image."
 	@echo
 	sudo -u postgres createdb --encoding utf-8 --template template0 janitoo_tests
+	@echo
+	@echo "Docker configuration for ${MODULENAME} finished."
 
 docker-tests:
 	@echo
