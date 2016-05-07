@@ -10,8 +10,8 @@ python:
 before_install:
   - sudo apt-get update -qq
   - make deps
-install:
   - make directories
+install:
   - make travis-deps
   - make install
 # command to run tests
