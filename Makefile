@@ -147,6 +147,8 @@ docker-deps:
 	-test -d docker/supervisor-tests.conf.d && cp -rf docker/supervisor-tests.conf.d/* /etc/supervisor/janitoo-tests.conf.d/
 	-test -d docker/nginx && cp -rf docker/nginx/* /etc/nginx/conf.d/
 	sudo -u postgres createdb --encoding utf-8 --template template0 janitoo_tests
+	sudo -u postgres psql --command "CREATE USER janitoo WITH PASSWORD 'janitoo';" janitoo_tests
+	sudo -u postgres psql --command "GRANT ALL PRIVILEGES ON DATABASE janitoo_tests TO janitoo;" janitoo_tests
 	@echo
 	@echo "Docker dependencies for ${MODULENAME} installed."
 
