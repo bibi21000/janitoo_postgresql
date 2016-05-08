@@ -143,7 +143,6 @@ travis-deps: deps
 
 docker-deps:
 	-cp -rf docker/config/* /opt/janitoo/etc/
-	-ls -lisa docker/supervisor.conf.d/*
 	-cp -rf docker/supervisor.conf.d/* /etc/supervisor/janitoo.conf.d/
 	-cp -rf docker/supervisor-tests.conf.d/* /etc/supervisor/janitoo-tests.conf.d/
 	-cp -rf docker/nginx/* /etc/nginx/conf.d/
