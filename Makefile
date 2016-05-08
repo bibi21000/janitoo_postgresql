@@ -145,7 +145,6 @@ docker-deps:
 	-cp -rf docker/config/* /opt/janitoo/etc/
 	-ls -lisa docker/supervisor.conf.d/*
 	-cp -rf docker/supervisor.conf.d/* /etc/supervisor/janitoo.conf.d/
-	-ls -lisa docker/supervisor-tests.conf.d/*
 	-cp -rf docker/supervisor-tests.conf.d/* /etc/supervisor/janitoo-tests.conf.d/
 	-cp -rf docker/nginx/* /etc/nginx/conf.d/
 	sudo -u postgres createdb --encoding utf-8 --template template0 janitoo_tests
